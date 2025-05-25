@@ -1,665 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Dares Roulette: Extreme Edition 💖</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Nunito:wght@400;600;700;800&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Nunito', sans-serif;
-            background: linear-gradient(45deg, #ff9a9e, #fecfef, #a8edea, #fed6e3, #d299c2, #fef9d7);
-            background-size: 600% 600%;
-            animation: gradientShift 10s ease infinite;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .title {
-            font-family: 'Fredoka One', cursive;
-            font-size: 3rem;
-            color: #fff;
-            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            margin-bottom: 10px;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            color: #fff;
-            margin-bottom: 30px;
-            font-weight: 600;
-        }
-        
-        .game-board {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 25px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
-            margin-bottom: 20px;
-        }
-        
-        .players-section {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            gap: 20px;
-        }
-        
-        .player {
-            flex: 1;
-            background: linear-gradient(135deg, #a8edea, #fed6e3);
-            color: #333;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-        
-        .player input {
-            background: rgba(255,255,255,0.7);
-            border: none;
-            padding: 10px;
-            border-radius: 10px;
-            color: #333;
-            font-size: 1.1rem;
-            width: 100%;
-            margin-bottom: 10px;
-            text-align: center;
-            font-weight: 600;
-        }
-        
-        .player input::placeholder { color: rgba(0,0,0,0.5); }
-        
-        .score {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-top: 10px;
-        }
-        
-        .spinner-section {
-            margin: 40px 0;
-            text-align: center;
-        }
-        
-        .dare-button {
-            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
-            background-size: 400% 400%;
-            animation: gradientShift 3s ease infinite;
-            border: none;
-            padding: 25px 50px;
-            border-radius: 50px;
-            font-family: 'Fredoka One', cursive;
-            font-size: 1.8rem;
-            color: white;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
-            margin: 0 auto;
-            display: block;
-        }
-        
-        .dare-button:hover {
-            transform: scale(1.05) rotate(2deg);
-        }
-        
-        .dare-button:active {
-            transform: scale(0.95);
-        }
-        
-        .current-dare {
-            background: linear-gradient(135deg, #ffecd2, #fcb69f);
-            color: #333;
-            padding: 30px;
-            border-radius: 20px;
-            margin: 30px 0;
-            min-height: 120px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-        
-        .dare-category {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-        
-        .dare-text {
-            font-size: 1.3rem;
-            line-height: 1.4;
-            font-weight: 600;
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-        
-        .action-btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .do-btn {
-            background: linear-gradient(45deg, #4facfe, #00f2fe);
-            color: white;
-        }
-        
-        .pass-btn {
-            background: linear-gradient(45deg, #fa709a, #fee140);
-            color: white;
-        }
-        
-        .double-btn {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-            color: white;
-        }
-        
-        .action-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-        
-        .round-tracker {
-            background: rgba(255,255,255,0.3);
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            color: #333;
-            font-weight: 700;
-        }
-        
-        .spice-indicator {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        
-        .spice-level {
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-        
-        .cute { background: #ffb3d9; color: #333; }
-        .flirty { background: #ffd3a5; color: #333; }
-        .spicy { background: #ffeaa0; color: #333; }
-        .chaos { background: #a8f0ff; color: #333; }
-        
-        .floating-hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .heart {
-            position: absolute;
-            font-size: 2rem;
-            opacity: 0.3;
-            animation: float 6s infinite linear;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .title { font-size: 2rem; }
-            .players-section { flex-direction: column; }
-            .action-buttons { flex-direction: column; align-items: center; }
-            .dare-button { padding: 20px 30px; font-size: 1.5rem; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Love Dares Roulette 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: background 1s ease;
+      overflow: hidden;
+    }
+
+    body.long-distance-mode {
+      background: linear-gradient(270deg, #ff9a9e, #fecfef, #a8edea, #fed6e3, #fbc2eb, #fef9d7);
+      background-size: 1000% 1000%;
+      animation: bgShiftLong 20s ease infinite;
+    }
+
+    body.together-mode {
+      background: linear-gradient(270deg, #ff6b6b, #ff9ff3, #feca57, #48dbfb, #ff6b81, #ffb8b8);
+      background-size: 1000% 1000%;
+      animation: bgShiftTogether 15s ease infinite;
+    }
+
+    @keyframes bgShiftLong {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes bgShiftTogether {
+      0% { background-position: 100% 0%; }
+      50% { background-position: 0% 100%; }
+      100% { background-position: 100% 0%; }
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      text-align: center;
+      color: white;
+    }
+
+    h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+
+    .mode-toggle {
+      margin: 20px 0;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+      margin: 0 10px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px; width: 26px;
+      left: 4px; bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #4facfe;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 30px;
+      background: #ff6b81;
+      color: white;
+      cursor: pointer;
+      margin-top: 30px;
+    }
+
+    .dare-text {
+      margin-top: 20px;
+      font-size: 1.4rem;
+      font-weight: 600;
+      background: rgba(255,255,255,0.2);
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    .floating {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .float-emoji {
+      position: absolute;
+      font-size: 2rem;
+      animation: floaty 10s infinite;
+      opacity: 0.4;
+    }
+
+    @keyframes floaty {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.3; }
+      50% { opacity: 0.5; }
+      90% { opacity: 0.3; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+  </style>
 </head>
-<body>
-    <div class="floating-hearts" id="hearts"></div>
-    
-    <div class="container">
-        <h1 class="title">Love Dares Roulette 💖</h1>
-        
-        <div class="game-board">
-            <div class="round-tracker">
-                Round <span id="round">1</span> • Spice Level: <span id="spiceLevel">Getting Warmed Up 🌶️</span>
-            </div>
-            
-            <div class="players-section">
-                <div class="player">
-                    <input type="text" id="player1Name" placeholder="Player 1 Name 💕" value="You">
-                    <div class="score">Score: <span id="player1Score">0</span></div>
-                </div>
-                <div class="player">
-                    <input type="text" id="player2Name" placeholder="Player 2 Name 💕" value="Your Bae">
-                    <div class="score">Score: <span id="player2Score">0</span></div>
-                </div>
-            </div>
-            
-            <div class="spice-indicator">
-                <div class="spice-level cute">💖 Cute & Sweet</div>
-                <div class="spice-level flirty">😘 Flirty Fun</div>
-                <div class="spice-level spicy">😳 Spicy Vibes</div>
-                <div class="spice-level chaos">🔥 Pure Chaos</div>
-            </div>
-            
-            <div class="spinner-section">
-                <button class="dare-button" id="dareButton">🎀 DARE ME! 🎀</button>
-            </div>
-            
-            <div class="current-dare" id="currentDare" style="display: none;">
-                <div class="dare-category" id="dareCategory"></div>
-                <div class="dare-text" id="dareText"></div>
-                
-                <div class="action-buttons">
-                    <button class="action-btn do-btn" id="doBtn">🌟 DO IT!</button>
-                    <button class="action-btn pass-btn" id="passBtn">🙈 PASS</button>
-                    <button class="action-btn double-btn" id="doubleBtn">🔥 DOUBLE DARE!</button>
-                </div>
-            </div>
-        </div>
+<body class="long-distance-mode">
+  <div class="floating" id="floatArea"></div>
+
+  <div class="container">
+    <h1>Love Dares Roulette 💖</h1>
+
+    <div class="mode-toggle">
+      <label style="font-size: 1.1rem;">Mode:</label>
+      <label class="switch">
+        <input type="checkbox" id="modeToggle">
+        <span class="slider"></span>
+      </label>
+      <span id="modeLabel">📱 Long Distance</span>
     </div>
 
-    <script>
-        const dares = {
-            cute: [
-                "Send a selfie doing a heart with your hands 💖",
-                "Tell your partner your favorite thing about their smile 😊",
-                "Do a little happy dance for 10 seconds 💃",
-                "Give your partner 3 genuine compliments in a row 🌟",
-                "Draw a heart on your hand and show it to your partner ✋💖",
-                "Make up a cute nickname for your partner on the spot 🥰",
-                "Send a voice message saying 'good morning' in 3 different cute voices 🎵",
-                "Draw your partner as a stick figure and show it 🎨",
-                "Send them a picture of something nearby that reminds you of them 📸",
-                "Write a 4-line poem about why they’re adorable 🧁",
-                "Say 'I love you' in 3 different accents 🌍",
-                "Take a selfie with your most dramatic puppy eyes 🥺",
-                "Change their contact name to something ridiculously sweet and send a screenshot 📱",
-                "Do your best 'I'm a shy anime character' impression 🎌",
-                "Make a tiny origami heart and show it on camera (or fake it with a folded paper 🤷‍♀️)",
-"Take a photo of your current socks and say 'these are my love socks' 🧦💘",
-"Write 'I ❤️ [partner's name]' on a sticky note and stick it somewhere cute 📝",
-"Send them a GIF that represents how you feel right now 🥹",
-"Say your partner’s name in the most baby-voiced way possible 👶",
-"Do a little ‘happy dance’ like you just got a text from them 💃📱",
-"Take a selfie with a random household object you 'adopted' as your love mascot 🧸"
+    <button id="dareButton">🎀 DARE ME! 🎀</button>
+    <div class="dare-text" id="dareText" style="display:none;"></div>
+  </div>
 
-            ],
-            flirty: [
-                "Whisper something sweet in a voice note 😘",
-                "Tell your partner what you were thinking about them today 💭",
-                "Send a text describing your ideal date night together 🌙",
-                "Give your partner a virtual kiss (make the sound!) 💋",
-                "Tell them the first thing you noticed about them 👀",
-                "Send a flirty emoji combination that describes your mood 😏",
-                "Voice message: Say their name in the most romantic way possible 💕",
-                "Describe how your partner looks using only song lyrics 🎶",
-                "Tell them where you’d kiss them right now (and why 😏)",
-                "Send a text that starts sweet but ends spicy 😇👉😈",
-                "Do a dramatic slow-motion hair flip while saying their name 🌀",
-                "Text them your favorite romantic movie scene and why it reminds you of them 🎬",
-                "Send an emoji-only message that says 'I want you' without using words 😳",
-                "Send them your ‘seductive look’ in selfie form 😘📷",
-                "Send a pic of the outfit you’d wear on your next date 💃 (or draw it lol)",
-"Describe a kiss in as much detail as you can… without using the word ‘kiss’ 💋",
-"Send a message that starts as a joke and ends like a confession 😏",
-"Flirt with them in a way your grandma would 😳🧓",
-"Send a list of the 3 weirdest things you find attractive about them 👀",
-"Write a short fake Tinder bio for your partner (bonus: roast them lightly 😂)",
-"Send a zoomed-in pic of a random body part and make them guess 🔍"
+  <script>
+    let isTogetherMode = false;
+    const dares = {
+      longDistance: [
+        "Send a voice note saying 'I miss you' in 3 accents 💌",
+        "Draw a heart and hold it up to the camera ❤️",
+        "Text a photo of something that reminds you of your partner ✨"
+      ],
+      together: [
+        "Kiss them gently on the forehead 💋",
+        "Whisper your favorite memory into their ear 🥰",
+        "Hold their hand and say one thing you love about them ❤️"
+      ]
+    };
 
-            ],
-            spicy: [
-                "Describe your partner's hottest feature in exactly 3 words 🔥",
-                "Text them something that would make them blush 😳",
-                "Tell them your favorite memory of you two together 💫",
-                "Send a voice note whispering a secret compliment 🤫",
-                "Describe your partner using only food comparisons 🍯",
-                "Tell them what you'd do if you were together right now 😈",
-                "Send them a song that reminds you of them and explain why 🎵",
-                "Describe what you’d whisper in their ear if you were next to them 👂💬",
-                "Send a photo of your ‘come here’ face 😏",
-                "Admit one slightly unhinged thing you've done because you missed them 🫣",
-                "Send them your top 3 'secret turn-ons' — no explanations 🔥",
-                "Text them the title of your imaginary spicy fanfic about the two of you 📖",
-                "Confess a past crush you had (bonus: compare them to your partner 👀)",
-                "Send a song that makes you think of... bed 🛏️💋",
-                "Send a 3-second voice note saying something you’d only say with the lights off 🌑",
-"Admit a totally random fantasy (the weirder, the better 😈)",
-"Text your partner pretending you're in the middle of a dramatic steamy scene 📖🔥",
-"Send a selfie with 'that look' — you know the one 😳",
-"Say something spicy... but in the voice of a cartoon character 🐿️🔥",
-"Describe their touch using metaphors (ex: ‘like silk dipped in danger’ 😮‍💨)",
-"Text them your fake ‘spicy-safe word’ and explain why it’s that word 🍍🚨",
-"Send a voice note of you saying their name like you *really* miss them 😮‍💨",
-"Text what you'd whisper in their ear if you were close... but use 🫢 emojis for censored parts 😈",
-"Send a pic of your ‘after-dark’ face 😳🕯️",
-"Text them a fake 'chapter title' from your imaginary steamy romance novel together 📖🔥",
-"Describe the last dream you had about them — or make one up if you forgot 😇",
-"Write a short ‘spicy text’... but in the style of a medieval knight 🏰💋",
-"Send your best flirty GIF with zero context — just vibes 🎥",
-"Text: 'If we were alone right now, I’d... (complete the sentence 🫠)'",
-"Send a selfie with your most *tease-y* expression — bonus points for dramatic lighting 💡😏",
-"Pick one: kiss, bite, or whisper. Text what you'd do and *where* 😳💬",
-"Tell them the **first spicy thought** you ever had about them (BE BRAVE) 😬🔥",
-"Send a flirt in the form of a Shakespearean sonnet line (‘Shall I compare thee to a spicy night?’) 🎭💘",
-"Send a voice note of you saying 'I want you' — slow, low, and dramatic 🎙️🔥",
-"Describe how you’d slowly kiss them — in 10 words only 😳",
-"Invent a spicy code word and text them what it secretly means 😏🔐",
-"Send a pic of your 'bedroom eyes' (interpret however you want 😈)",
-"Text the *one thing* they do that secretly drives you wild 🤭",
-"Type out the *slowest possible* seductive sentence you can... one word at a time 💬",
-"Send a selfie wrapped in a blanket and call it your ‘thirst trap burrito’ 🌯🥵",
-"Choose: Soft? Rough? Slow? Fast? Text your answers with zero context ⏱️👀",
-"Voice note: moan their name *like you’re reaching for the last slice of pizza* 🍕😉",
-"Write a dramatic 2-line steamy scene using only food metaphors (e.g. 'He was the chili drizzle on my mango sundae') 🍓🌶️",
-"Text them like you’re in a forbidden office romance. Be extra. Be messy. 👔🔥",
-"Send a close-up pic of your lips. No words. Just chaos 💋📸",
-"Describe your love life using only steamy emojis (minimum 7, maximum 13) 🔥🍑💦🤐",
-"Send a fake 'late night' message as if it’s 2AM and you miss them… deeply 🕑💭",
-"Text them: 'If you were a candle… what scent would you be, and where would I light you?' 🕯️👄",
-"Whisper something spicy in their ear… then pretend nothing happened 😈",
-"Give them a slow 5-second kiss… and stop right before it gets too good 😳",
-"Sit on their lap and look into their eyes for 15 seconds. First to laugh loses 👀",
-"Trace a heart on their arm or back using only your fingertip 🖐️💘",
-"Choose a body part and give it a ‘compliment’... using your lips 💋",
-"Do a 10-second slow dance with them… no music. Just vibes 💃🕺",
-"Say the naughtiest sentence you can… without using any naughty words 🔥🧠",
-"Stand behind them, wrap your arms around, and whisper what you’d do if the lights were off 🕯️",
-"Challenge: Hold eye contact while slowly sucking on a piece of candy. Whoever breaks first does another dare 🍬👁️👁️",
-"Trace their jawline with your finger while describing your favorite feature on their body ✨",
-"Give them a slow, dramatic kiss... but on their forehead — and see their reaction 😏",
-"Use your phone to type one spicy message to them… and slide it over instead of speaking 📱",
-"Give them a back hug and tell them everything you love about their body — no holding back 🫂🔥",
-"Touch the tip of their nose, then slowly drag your finger down to their lips. Say nothing. 😶",
-"Act out your ‘fantasy movie kiss’ moment — exaggerated, cheesy, intense. Go all in 🎬💋",
-"Recreate a scene from a romance movie... but make it ✨spicy improv edition✨ 🎭",
-"Sit face-to-face, knees touching, and say something bold… without breaking eye contact 😳",
-"Take their hand and slowly kiss each fingertip — yes, dramatically 💋",
-"Get real close to their ear and spell out a naughty word… one letter at a time 🔡😈",
-"Take a pillow and whisper your deepest fantasy into it. Let them hear *just enough* 👂🛏️",
-"Trace an invisible heart on their leg with your finger. If they guess it — they win a kiss 💘",
-"Wrap a blanket around both of you and do the next dare *undercover* 🫣🛌",
-"Touch their lips softly, then say exactly what you wish they’d do with them 💭💄",
-"Blindfold your partner for 30 seconds. Use touch to make them guess what you're doing 😶‍🌫️🖐️",
-"Lay your head in their lap and confess a *secret thought* you’ve had about them 🔥🤐",
-"Let them pick a spot (neck, wrist, shoulder) and give them 5 slow kisses there — no talking 😵‍💫",
-"Sit behind them and trace shapes on their back. If they guess it right, they get a reward 😈",
-"Pick a spot on their body and describe it like you’re writing poetry… steamy poetry 📖🔥",
-"Whisper a fake steamy scenario into their ear — dramatic voice only 🎭💋",
-"Sit on opposite ends of the couch and text each other *exactly* what you want to do next 🛋️📲",
-"Do a dramatic slow-motion lean-in like you're about to kiss them… but don’t. Let the tension cook 😏",
-                "Sit on their lap, facing them. One minute. No words. Just eyes and touches. Let the silence talk 🔥",
-"Get on top (literally or figuratively) and whisper your top 3 'what I want to do to you right now' lines 😈",
-"Guide their hand to a spot on your body and say, 'This is where I want your attention tonight' 🫢",
-"Grab their face gently, kiss their cheek, then their neck, then... pause. Ask, 'Want me to keep going?' 💋",
-"Lie next to them and describe, in vivid detail, a fantasy you’ve had about this exact moment 😳",
-"Pick a piece of clothing and say: 'If I remove this, you owe me a dare you won’t forget' 🧥🔥",
-"Blindfold them. Slowly explore their face with your fingertips and tell them everything you adore — physically and otherwise 👁️🖐️",
-"Let them lie back. Use only your lips to give 3 kisses that escalate in *intention* 💄",
-"Sit across from them. Say the most seductive thing you can in your calmest voice. Watch what happens 🫠",
-"Take turns daring each other where to kiss. You *have* to obey — or confess a secret instead 👄",
-"Stand behind them. Slide your hands around their waist and whisper your biggest ‘unspoken craving’ into their ear 🫣",
-"Say the sentence: 'I dare you to stop me.' Then, slowly go in for a kiss. See if they do 😏",
-"Put your hand on their chest, feel their heartbeat, and say what it makes you think about 💘",
-"Choose one: Kiss. Touch. Whisper. Now choose a *place*. Deliver with intensity. No hesitation 🥵",
-"Look them in the eyes and say the filthiest sentence you can without breaking a smile 😳",
-"Take a deep breath. Get real close. And ask: 'Do you want the next round of this game... or *me*?' 🔥"
+    document.getElementById("modeToggle").addEventListener("change", function () {
+      isTogetherMode = this.checked;
+      document.getElementById("modeLabel").textContent = isTogetherMode ? "🏠 Together" : "📱 Long Distance";
+      document.body.classList.remove("long-distance-mode", "together-mode");
+      document.body.classList.add(isTogetherMode ? "together-mode" : "long-distance-mode");
+    });
 
-],
-            chaos: [
-                "Call them and sing a song with their name in it 🎤",
-                "Do your best impression of them for 30 seconds 🎭",
-                "Send a video of you doing the most dramatic love confession ever 🎬",
-                "Text them a pickup line in a language you don't speak 🌍",
-                "Send a voice message speaking only in questions for 1 minute ❓",
-                "Do a freestyle rap about your relationship 🎵",
-                "Send them a video of you doing your 'signature dance move' 💃",
-                "Text your partner like you’re a Shakespearean lover in distress 🎭📜",
-                "Send a voice note as if you’re a love-crazed opera singer 🎤",
-                "Do your best soap opera confession — tears, drama, the works 😭🌹",
-                "Speak only in song lyrics to them for the next 2 minutes 🎶",
-                "Text your partner a completely made-up story about how you first met 📚",
-                "Send a video proposing marriage using only emojis and interpretive dance 💍💃",
-                "Call them and read a cereal box like it's poetry 📦📖",
-                "Send a TikTok-style rant about how obsessed you are with your partner (drama pls) 📢",
-"Send a pic of yourself doing the ‘romantic stare into the void’ 📸😩",
-"Voice note: Confess your love in a fake alien language 👽💌",
-"Act out a breakup scene with your pet or a stuffed animal 🧸💔",
-"Write a Shakespeare-style insult but make it romantic ('Thou art a saucy minx!') 🎭",
-"Draw your dream wedding cake using MS Paint or a napkin ✍️🎂",
-"Send a message with only emojis... but it has to be 15+ emojis long 🤪"
+    document.getElementById("dareButton").addEventListener("click", () => {
+      const darePool = isTogetherMode ? dares.together : dares.longDistance;
+      const dare = darePool[Math.floor(Math.random() * darePool.length)];
+      const dareText = document.getElementById("dareText");
+      dareText.textContent = dare;
+      dareText.style.display = 'block';
+    });
 
-            ]
-        };
+    function floatEmoji() {
+      const emoji = document.createElement('div');
+      emoji.classList.add('float-emoji');
+      emoji.style.left = Math.random() * 100 + 'vw';
+      emoji.style.animationDuration = (Math.random() * 5 + 6) + 's';
+      emoji.innerText = ['💖','💕','💘','💝','💓','💋','✨','🌸','🥰'][Math.floor(Math.random() * 9)];
+      document.getElementById('floatArea').appendChild(emoji);
+      setTimeout(() => emoji.remove(), 10000);
+    }
 
-        let currentPlayer = 1;
-        let round = 1;
-        let player1Score = 0;
-        let player2Score = 0;
-        let currentDareData = {};
-
-        // Initialize floating hearts
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.innerHTML = ['💖', '💕', '💗', '💝', '💘', '🥰', '😍', '🌸', '🦄', '✨'][Math.floor(Math.random() * 10)];
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            document.getElementById('hearts').appendChild(heart);
-            
-            setTimeout(() => {
-                heart.remove();
-            }, 6000);
-        }
-
-        setInterval(createHeart, 2000);
-
-        // Game logic
-        function getDareCategory() {
-            const categories = ['cute', 'flirty', 'spicy', 'chaos'];
-            let weights;
-            
-            if (round <= 2) {
-                weights = [40, 30, 20, 10]; // Mostly cute/flirty early on
-            } else if (round <= 4) {
-                weights = [25, 35, 25, 15]; // More balanced
-            } else {
-                weights = [15, 25, 35, 25]; // Spicier later
-            }
-            
-            const random = Math.random() * 100;
-            let sum = 0;
-            
-            for (let i = 0; i < categories.length; i++) {
-                sum += weights[i];
-                if (random <= sum) {
-                    return categories[i];
-                }
-            }
-            return 'cute';
-        }
-
-        function getCategoryEmoji(category) {
-            const emojis = {
-                cute: '💖',
-                flirty: '😘',
-                spicy: '😳',
-                chaos: '🔥'
-            };
-            return emojis[category];
-        }
-
-        function getSpiceLevel() {
-            if (round <= 2) return "Getting Warmed Up 🌶️";
-            if (round <= 4) return "Turning Up The Heat 🌶️🌶️";
-            if (round <= 6) return "Things Are Spicy 🌶️🌶️🌶️";
-            return "MAXIMUM CHAOS 🌶️🌶️🌶️🌶️";
-        }
-
-        function generateDare() {
-            const category = getDareCategory();
-            const categoryDares = dares[category];
-            const dare = categoryDares[Math.floor(Math.random() * categoryDares.length)];
-            
-            currentDareData = { category, dare };
-            
-            document.getElementById('dareCategory').innerHTML = `${getCategoryEmoji(category)} ${category.toUpperCase()}`;
-            document.getElementById('dareText').innerHTML = dare;
-            document.getElementById('currentDare').style.display = 'block';
-            document.getElementById('dareButton').style.display = 'none';
-        }
-
-        function doAction(action) {
-            const currentPlayerName = currentPlayer === 1 ? 
-                document.getElementById('player1Name').value || 'Player 1' : 
-                document.getElementById('player2Name').value || 'Player 2';
-            
-            let points = 0;
-            let message = '';
-            
-            switch(action) {
-                case 'do':
-                    points = currentDareData.category === 'chaos' ? 4 : 
-                            currentDareData.category === 'spicy' ? 3 :
-                            currentDareData.category === 'flirty' ? 2 : 1;
-                    message = `${currentPlayerName} completed the dare! +${points} points! 🎉`;
-                    break;
-                case 'pass':
-                    points = -1;
-                    message = `${currentPlayerName} passed... -1 point! 😅`;
-                    break;
-                case 'double':
-                    points = (currentDareData.category === 'chaos' ? 4 : 
-                             currentDareData.category === 'spicy' ? 3 :
-                             currentDareData.category === 'flirty' ? 2 : 1) * 2;
-                    message = `${currentPlayerName} DOUBLED DOWN! The stakes are higher! +${points} points! 🔥🔥`;
-                    
-                    // Make the dare more intense
-                    const intensifiers = [
-                        "...but make it 10x more dramatic! 🎭",
-                        "...while doing your best celebrity impression! ⭐",
-                        "...and add jazz hands! 🙌",
-                        "...in the style of a superhero! 🦸‍♀️",
-                        "...like you're in a music video! 🎵"
-                    ];
-                    document.getElementById('dareText').innerHTML += "<br><strong>" + intensifiers[Math.floor(Math.random() * intensifiers.length)] + "</strong>";
-                    break;
-            }
-            
-            if (currentPlayer === 1) {
-                player1Score += points;
-                document.getElementById('player1Score').textContent = player1Score;
-            } else {
-                player2Score += points;
-                document.getElementById('player2Score').textContent = player2Score;
-            }
-            
-            alert(message);
-            nextTurn();
-        }
-
-        function nextTurn() {
-            currentPlayer = currentPlayer === 1 ? 2 : 1;
-            if (currentPlayer === 1) {
-                round++;
-                document.getElementById('round').textContent = round;
-                document.getElementById('spiceLevel').textContent = getSpiceLevel();
-            }
-            
-            document.getElementById('currentDare').style.display = 'none';
-            document.getElementById('dareButton').style.display = 'block';
-        }
-
-        // Event listeners
-        document.getElementById('dareButton').addEventListener('click', generateDare);
-        document.getElementById('doBtn').addEventListener('click', () => doAction('do'));
-        document.getElementById('passBtn').addEventListener('click', () => doAction('pass'));
-        document.getElementById('doubleBtn').addEventListener('click', () => doAction('double'));
-
-        // Sound effects (using audio context for simple beeps)
-        function playSound(frequency, duration) {
-            try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.value = frequency;
-                oscillator.type = 'sine';
-                
-                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
-                
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + duration);
-            } catch (e) {
-                // Fallback - no sound
-            }
-        }
-
-        // Add sound effects to buttons
-        document.getElementById('dareButton').addEventListener('click', () => playSound(523, 0.2));
-        document.getElementById('doBtn').addEventListener('click', () => playSound(659, 0.3));
-        document.getElementById('passBtn').addEventListener('click', () => playSound(392, 0.3));
-        document.getElementById('doubleBtn').addEventListener('click', () => playSound(783, 0.4));
-    </script>
+    setInterval(floatEmoji, 800);
+  </script>
 </body>
 </html>
