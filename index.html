@@ -3,446 +3,399 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Love Dares Roulette: Extreme Edition</title>
+<title>Love Dares Roulette: Extreme Edition ❤️</title>
 <style>
-  :root {
-    --ld-bg: linear-gradient(135deg, #a1c4fd, #fbc7f9);
-    --ld-text: #333;
-    --ld-accent: #ff90b3;
-    --together-bg: #220033;
-    --together-text: #ffb3ec;
-    --together-accent: #ff1a75;
-  }
-  body {
-    font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: var(--bg-color);
-    color: var(--text-color);
-    transition: background 0.5s ease-in-out, color 0.5s;
-    overflow-x: hidden;
-    position: relative;
-    min-height: 100vh;
-  }
-  body.long-distance {
-    --bg-color: var(--ld-bg);
-    --text-color: var(--ld-text);
-  }
-  body.together {
-    --bg-color: var(--together-bg);
-    --text-color: var(--together-text);
-  }
-  .container {
-    max-width: 700px;
-    margin: auto;
-    padding: 2em;
-    background: rgba(255,255,255,0.7);
-    border-radius: 20px;
-    margin-top: 6em;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    position: relative;
-    z-index: 10;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
-  }
-  body.together .container {
-    background: rgba(34,0,51,0.9);
-    box-shadow: 0 0 30px #ff1a75;
-  }
-  h1 {
-    font-size: 2em;
-    margin-bottom: 1em;
-  }
-  .mode-toggle {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 20;
-  }
-  .mode-toggle button {
-    background: transparent;
-    border: none;
-    font-size: 2.5em;
-    cursor: pointer;
-    animation: bounce 2s infinite;
-    color: var(--text-color);
-  }
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-  }
-  #dareMeBtn {
-    background: var(--text-color);
-    color: var(--bg-color);
-    padding: 0.8em 1.8em;
-    font-size: 1.3em;
-    border: none;
-    border-radius: 20px;
-    margin: 1.5em auto;
-    cursor: pointer;
-    animation: pulse 1.5s infinite;
-    box-shadow: 0 0 10px var(--text-color);
-  }
-  #dareMeBtn:disabled {
-    background: #999;
-    cursor: not-allowed;
-    animation: none;
-    box-shadow: none;
-  }
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-  }
-  .badge {
-    display: inline-block;
-    margin-top: 0.5em;
-    padding: 0.4em 1em;
-    border-radius: 999px;
-    font-weight: bold;
-    font-size: 0.9em;
-    user-select: none;
-  }
-  .💖 { background: #ffdef2; color: #d6007d; }
-  .😘 { background: #ffd1d1; color: #d43a3a; }
-  .😳 { background: #ffe3a1; color: #e88b00; }
-  .🔥 { background: #ffb3b3; color: #ff0000; }
-  .actions button {
-    padding: 0.5em 1em;
-    margin: 0.5em;
-    font-size: 1em;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    background: var(--text-color);
-    color: var(--bg-color);
-    transition: transform 0.2s;
-    box-shadow: 0 0 6px var(--text-color);
-  }
-  .actions button:hover {
-    transform: scale(1.05);
-  }
-  #dareDisplay.hidden {
-    display: none;
-  }
-  #dareText {
-    font-size: 1.2em;
-    margin: 1em 0;
-  }
-  .emoji-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    font-size: 2.5em;
-    width: 100%;
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+  html, body {
     height: 100%;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.15;
-    user-select: none;
-    overflow: hidden;
+    margin: 0;
   }
-  .emoji-bg span {
-    position: absolute;
-    animation: floatUp linear infinite;
-    user-select: none;
-  }
-  @keyframes floatUp {
-    0% {
-      transform: translateY(100vh) scale(1);
-      opacity: 0;
-    }
-    50% {
-      opacity: 0.6;
-    }
-    100% {
-      transform: translateY(-10vh) scale(1.3);
-      opacity: 0;
-    }
-  }
-  .scoreboard {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 1em;
-    padding: 0.5em;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.2);
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-  body.together .scoreboard {
-    background: rgba(34,0,51,0.6);
-    box-shadow: 0 0 15px #ff1a75;
-  }
-  .player {
+
+  body {
+    font-family: 'Poppins', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  .player input {
-    font-size: 1em;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1rem;
+    transition: background 0.8s ease, color 0.8s ease;
     text-align: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  h1 {
+    margin: 0.5rem 0 1rem;
+    font-weight: 600;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    user-select: none;
+    max-width: 90vw;
+    line-height: 1.2;
+  }
+
+  #modeToggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    padding: 0.4rem 1.2rem;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
     border: none;
-    border-radius: 8px;
-    padding: 0.2em 0.5em;
-    margin-bottom: 0.3em;
+    background: linear-gradient(135deg, #ff82a9, #ff3d00);
+    color: white;
+    box-shadow: 0 0 10px rgba(255, 61, 0, 0.5);
+    transition: all 0.4s ease;
+    user-select: none;
+    z-index: 10;
+  }
+
+  #modeToggle:hover {
+    box-shadow: 0 0 18px rgba(255, 61, 0, 0.7);
+    transform: scale(1.05);
+  }
+
+  body.long-distance {
+    background: linear-gradient(135deg, #f6f1f1, #c9d6ff, #fbc7d4);
+    color: #3a3a3a;
+  }
+
+  body.long-distance h1 {
+    color: royalblue;
+    text-shadow: 0 0 6px rgba(65,105,225,0.7), 0 0 8px rgba(65,105,225,0.6);
+  }
+
+  body.together {
+    background: linear-gradient(135deg, #2c003e, #4a006f, #8c007f);
+    color: #f6e1e1;
+  }
+
+  body.together h1 {
+    color: #ff6f61;
+    text-shadow: 0 0 5px #ff3d00;
+  }
+
+  #playersContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    justify-content: center;
+    margin: 1rem 0 2rem;
+    width: 100%;
+  }
+
+  .player-card {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 1rem;
+    min-width: 140px;
+    max-width: 180px;
+    flex: 1 1 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  .player-card input {
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    border-radius: 12px;
+    border: none;
+    padding: 0.5rem;
+    margin-bottom: 0.8rem;
     outline: none;
-    color: var(--text-color);
-    background: transparent;
-    border: 1px solid var(--text-color);
-    transition: background 0.3s, color 0.3s;
+    background: #fff;
   }
-  .player input::placeholder {
-    color: var(--text-color);
-    opacity: 0.6;
+
+  .score-display {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: inherit;
   }
-  .player input:focus {
-    background: var(--text-color);
-    color: var(--bg-color);
+
+  #turnIndicator {
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    white-space: pre-line;
   }
-  .player span {
-    font-size: 1.3em;
-    font-weight: bold;
+
+  #dareButton {
+    background: #ff82a9;
+    border: none;
+    border-radius: 30px;
+    padding: 0.8rem 2.5rem;
+    font-weight: 700;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: #fff;
+    box-shadow: 0 0 15px #ff82a9aa;
+    margin-bottom: 1rem;
   }
-  #nextPlayerMsg {
-    margin-top: 1em;
-    font-size: 1.2em;
-    font-weight: bold;
-    min-height: 1.8em;
-    color: var(--text-color);
+
+  #dareBox {
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.3);
+    max-width: 90vw;
+    font-size: 1.2rem;
+    /* Hide by default */
+    display: none;
+  }
+
+  #dareActions {
+    display: none;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  #dareActions button {
+    background: #ff6f61;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  .emoji-float {
+    position: absolute;
+    font-size: 2rem;
+    animation-name: float;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(100vh);
+    }
+    100% {
+      transform: translateY(-100vh);
+    }
+  }
+
+  @media (max-width: 480px) {
+    #playersContainer {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .player-card {
+      max-width: 100%;
+    }
   }
 </style>
 </head>
 <body class="long-distance">
-  <div class="mode-toggle">
-    <button id="modeToggleBtn" title="Switch Mode">💌</button>
+  <h1>❤️‍🔥 Love Dares Roulette ❤️‍🔥</h1>
+  <button id="modeToggle" aria-label="Toggle Mode">Long Distance</button>
+
+  <div id="playersContainer">
+    <div class="player-card" id="player1Card">
+      <input type="text" id="player1Name" placeholder="Player 1" />
+      <div class="score-display" id="player1Score">0</div>
+    </div>
+    <div class="player-card" id="player2Card">
+      <input type="text" id="player2Name" placeholder="Player 2" />
+      <div class="score-display" id="player2Score">0</div>
+    </div>
   </div>
 
-  <div class="emoji-bg" id="emojiBackground"></div>
+  <div id="turnIndicator">Player 1's turn ✨</div>
+  <button id="dareButton">💖 Dare Me! 💖</button>
 
-  <div class="container">
-    <h1>Love Dares Roulette: Extreme Edition ❤️‍🔥💖</h1>
+  <div id="dareBox"></div>
 
-    <div class="scoreboard">
-      <div class="player">
-        <input type="text" id="player1Name" value="Player 1" maxlength="12" />
-        <span id="player1Score">0</span>
-      </div>
-      <div class="player">
-        <input type="text" id="player2Name" value="Player 2" maxlength="12" />
-        <span id="player2Score">0</span>
-      </div>
-    </div>
-
-    <button id="dareMeBtn">🎯 DARE ME</button>
-
-    <div id="dareDisplay" class="hidden">
-      <p id="dareText"></p>
-      <span id="dareVibe" class="badge"></span>
-
-      <div class="actions">
-        <button id="doBtn">✅ Do</button>
-        <button id="passBtn">❌ Pass</button>
-        <button id="doubleBtn">⚠️ Double Dare</button>
-      </div>
-    </div>
-
-    <div id="nextPlayerMsg"></div>
+  <div id="dareActions">
+    <button id="doBtn">Do 😘</button>
+    <button id="passBtn">Pass 😐</button>
+    <button id="doubleDareBtn">Double Dare 🔥</button>
   </div>
 
 <script>
-  const dares = {
-    long: {
-      "💖": [
-        "Send a selfie doing a heart with your hands.",
-        "Write 'I miss you' with your nose on camera.",
-        "Send a cute good morning text."
-      ],
-      "😘": [
-        "Whisper something sweet in a voice note.",
-        "Send a wink selfie.",
-        "Send a cute nickname for your partner."
-      ],
-      "😳": [
-        "Describe your partner’s hottest feature in 3 words.",
-        "Send a kissy-face video.",
-        "Tell your partner your secret crush moment."
-      ],
-      "🔥": [
-        "Call them and sing a song with their name in it.",
-        "Send a flirty 10-second video.",
-        "Describe your wildest dream involving your partner."
-      ]
-    },
-    together: {
-      "💖": [
-        "Give a 10-second forehead kiss.",
-        "Hold hands silently for 15 seconds.",
-        "Share a loving compliment looking in their eyes."
-      ],
-      "😘": [
-        "Do a 5-second slow dance with no music.",
-        "Compliment them while making eye contact.",
-        "Send a playful tickle attack."
-      ],
-      "😳": [
-        "Whisper your favorite fantasy.",
-        "Give them a flirty look without saying a word.",
-        "Describe their body part you love most."
-      ],
-      "🔥": [
-        "Call them and sing a song with their name in it.",
-        "Give a passionate kiss for 10 seconds.",
-        "Try a daring spin move with a surprise."
-      ]
-    }
-  };
+  const unicornEmojis = ["🩷", "🌈", "💖", "✨", "💕"];
+  const fireEmojis = ["🔥", "💋", "😈", "❤️‍🔥", "🥵"];
 
-  const vibes = ["💖", "😘", "😳", "🔥"];
-  const vibeNames = {
-    "💖": "Cute",
-    "😘": "Flirty",
-    "😳": "Spicy",
-    "🔥": "Chaos"
-  };
+  // Dares for each mode
+  const longDistanceDares = [
+    { vibe: "💖 Cute", text: "Send a selfie doing a heart with your hands." },
+    { vibe: "😘 Flirty", text: "Whisper something sweet in a voice note." },
+    { vibe: "😳 Spicy", text: "Describe your partner’s hottest feature in 3 words." },
+    { vibe: "🔥 Chaos", text: "Call them and sing a song with their name in it." }
+  ];
 
-  // Elements
-  const modeToggleBtn = document.getElementById("modeToggleBtn");
-  const body = document.body;
-  const dareMeBtn = document.getElementById("dareMeBtn");
-  const dareDisplay = document.getElementById("dareDisplay");
-  const dareText = document.getElementById("dareText");
-  const dareVibe = document.getElementById("dareVibe");
+  const togetherDares = [
+    { vibe: "💖 Cute", text: "Give your partner a warm hug for 10 seconds." },
+    { vibe: "😘 Flirty", text: "Share a secret fantasy with your partner." },
+    { vibe: "😳 Spicy", text: "Trace a heart on your partner’s skin with your finger." },
+    { vibe: "🔥 Chaos", text: "Playfully tickle your partner until they laugh." }
+  ];
+
+  // State variables
+  let mode = "long-distance"; // or "together"
+  let currentPlayer = 1;
+  let playerScores = [0, 0];
+  let currentDare = null;
+
+  // DOM references
+  const modeToggle = document.getElementById("modeToggle");
+  const player1NameInput = document.getElementById("player1Name");
+  const player2NameInput = document.getElementById("player2Name");
+  const player1ScoreEl = document.getElementById("player1Score");
+  const player2ScoreEl = document.getElementById("player2Score");
+  const turnIndicator = document.getElementById("turnIndicator");
+  const dareButton = document.getElementById("dareButton");
+  const dareBox = document.getElementById("dareBox");
+  const dareActions = document.getElementById("dareActions");
   const doBtn = document.getElementById("doBtn");
   const passBtn = document.getElementById("passBtn");
-  const doubleBtn = document.getElementById("doubleBtn");
-  const nextPlayerMsg = document.getElementById("nextPlayerMsg");
-  const emojiBg = document.getElementById("emojiBackground");
+  const doubleDareBtn = document.getElementById("doubleDareBtn");
 
-  const p1NameInput = document.getElementById("player1Name");
-  const p2NameInput = document.getElementById("player2Name");
-  const p1ScoreSpan = document.getElementById("player1Score");
-  const p2ScoreSpan = document.getElementById("player2Score");
+  // Helper: get current player's name or default
+  function getPlayerName(num) {
+    return (num === 1 ? player1NameInput.value.trim() : player2NameInput.value.trim()) || `Player ${num}`;
+  }
 
-  let mode = "long"; // long or together
-  let currentDare = null;
-  let currentVibe = null;
-  let currentPlayer = 0;
-  let scores = [0, 0];
-  let spiceLevel = 1; // 1-4 (corresponds to vibe index +1)
-
-  function updateEmojiBackground() {
-    emojiBg.innerHTML = "";
-    let emojis = [];
-    let colors = [];
-    let emojiCount = 50;
-
-    if(mode === "long") {
-      emojis = ["💖", "💕", "💗", "💓", "💞", "💘", "❤️"];
+  // Show dare or hide dareBox if none
+  function showDare(text) {
+    if (text) {
+      dareBox.style.display = "block";
+      dareBox.textContent = text;
     } else {
-      emojis = ["🔥", "💥", "😈", "🍑", "🥵", "💋", "❤️‍🔥"];
-    }
-
-    for(let i=0; i < emojiCount; i++){
-      const span = document.createElement("span");
-      span.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-      span.style.left = Math.random()*100 + "vw";
-      span.style.fontSize = (12 + Math.random()*20) + "px";
-      span.style.animationDuration = (8 + Math.random()*12) + "s";
-      span.style.animationDelay = (Math.random()*-20) + "s";
-      emojiBg.appendChild(span);
+      dareBox.style.display = "none";
+      dareBox.textContent = "";
     }
   }
 
-  function updateUI() {
-    if (mode === "long") {
-      body.classList.add("long-distance");
-      body.classList.remove("together");
-      modeToggleBtn.textContent = "💌";
-      nextPlayerMsg.style.color = "#333";
-    } else {
-      body.classList.add("together");
-      body.classList.remove("long-distance");
-      modeToggleBtn.textContent = "❤️‍🔥";
-      nextPlayerMsg.style.color = "#ffb3ec";
-    }
-    updateEmojiBackground();
-    dareDisplay.classList.add("hidden");
-    dareMeBtn.disabled = false;
-    nextPlayerMsg.textContent = `${getCurrentPlayerName()}'s turn! Click "DARE ME" 🎯`;
+  // Update turn indicator text
+  function updateTurnIndicator() {
+    turnIndicator.textContent = `${getPlayerName(currentPlayer)}'s turn`;
   }
 
-  function getCurrentPlayerName() {
-    return currentPlayer === 0 ? p1NameInput.value || "Player 1" : p2NameInput.value || "Player 2";
-  }
-
-  modeToggleBtn.onclick = () => {
-    mode = mode === "long" ? "together" : "long";
-    scores = [0,0];
-    currentPlayer = 0;
-    updateScores();
-    updateUI();
-  };
-
-  dareMeBtn.onclick = () => {
-    dareMeBtn.disabled = true;
-    // Pick random vibe weighted by spiceLevel or random?
-    // For progressive spiciness you could do spiceLevel++ after each round. We'll just random for now.
-    let vibesAvailable = Object.keys(dares[mode]);
-    currentVibe = vibesAvailable[Math.floor(Math.random()*vibesAvailable.length)];
-    let dareList = dares[mode][currentVibe];
-    currentDare = dareList[Math.floor(Math.random()*dareList.length)];
-
-    dareText.textContent = currentDare;
-    dareVibe.textContent = currentVibe + " " + vibeNames[currentVibe];
-    dareVibe.className = "badge " + currentVibe;
-    dareDisplay.classList.remove("hidden");
-    nextPlayerMsg.textContent = `Complete or pass the dare, ${getCurrentPlayerName()}`;
-  };
-
-  function endTurn(message) {
-    dareDisplay.classList.add("hidden");
-    currentPlayer = 1 - currentPlayer;
-    dareMeBtn.disabled = false;
-    nextPlayerMsg.textContent = `${getCurrentPlayerName()}'s turn! Click "DARE ME" 🎯`;
-  }
-
-  doBtn.onclick = () => {
-    let points = 1;
-    if (currentVibe === "🔥") points = 2;
-    scores[currentPlayer] += points;
-    updateScores();
-    endTurn(`Well done, ${getCurrentPlayerName()}! You earned ${points} point${points > 1 ? "s" : ""}.`);
-  };
-
-  passBtn.onclick = () => {
-    // penalty for passing: lose 1 point if possible
-    if (scores[currentPlayer] > 0) scores[currentPlayer]--;
-    updateScores();
-    endTurn(`${getCurrentPlayerName()} passed and lost 1 point.`);
-  };
-
-  doubleBtn.onclick = () => {
-    let points = 2;
-    if (currentVibe === "🔥") points = 4;
-    scores[currentPlayer] += points;
-    updateScores();
-    endTurn(`Double Dare accepted! ${getCurrentPlayerName()} earned ${points} points!`);
-  };
-
+  // Update scores display
   function updateScores() {
-    p1ScoreSpan.textContent = scores[0];
-    p2ScoreSpan.textContent = scores[1];
+    player1ScoreEl.textContent = playerScores[0];
+    player2ScoreEl.textContent = playerScores[1];
   }
 
-  // Initialize UI
-  updateUI();
-  updateScores();
+  // Switch player turn
+  function switchPlayer() {
+    currentPlayer = currentPlayer === 1 ? 2 : 1;
+    updateTurnIndicator();
+  }
 
-  // Prevent form submit on Enter for names
-  [p1NameInput, p2NameInput].forEach(input => {
-    input.addEventListener('keydown', e => {
-      if(e.key === 'Enter') e.preventDefault();
-    });
+  // Get a random dare based on mode
+  function getRandomDare() {
+    const dares = mode === "long-distance" ? longDistanceDares : togetherDares;
+    const idx = Math.floor(Math.random() * dares.length);
+    return dares[idx];
+  }
+
+  // Spawn emojis function (all float always)
+  function spawnEmojis(emojis) {
+    // Remove existing emojis first
+    document.querySelectorAll(".emoji-float").forEach(e => e.remove());
+
+    const count = 30;
+    for (let i = 0; i < count; i++) {
+      const emoji = document.createElement("div");
+      emoji.className = "emoji-float";
+      emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+      // Randomize horizontal position (0-100vw)
+      emoji.style.left = Math.random() * 100 + "vw";
+      // Randomize vertical position (0-100vh)
+      emoji.style.top = Math.random() * 100 + "vh";
+
+      // Randomize animation duration between 15-30 seconds for variety
+      emoji.style.animationDuration = (15 + Math.random() * 15) + "s";
+      // Randomize animation delay so they float at different times
+      emoji.style.animationDelay = Math.random() * 20 + "s";
+
+      document.body.appendChild(emoji);
+    }
+  }
+
+  // Mode toggle click handler
+  modeToggle.addEventListener("click", () => {
+    if (mode === "long-distance") {
+      mode = "together";
+      document.body.classList.remove("long-distance");
+      document.body.classList.add("together");
+      modeToggle.textContent = "Together";
+      spawnEmojis(fireEmojis);
+    } else {
+      mode = "long-distance";
+      document.body.classList.remove("together");
+      document.body.classList.add("long-distance");
+      modeToggle.textContent = "Long Distance";
+      spawnEmojis(unicornEmojis);
+    }
+    // Reset dare and UI on mode change
+    currentDare = null;
+    showDare("");
+    dareActions.style.display = "none";
   });
+
+  // Dare button click handler
+  dareButton.addEventListener("click", () => {
+    currentDare = getRandomDare();
+    showDare(`${currentDare.vibe} — ${currentDare.text}`);
+    dareActions.style.display = "flex";
+  });
+
+  // Dare action buttons
+  doBtn.addEventListener("click", () => {
+    // Award 1 point for doing dare
+    playerScores[currentPlayer - 1]++;
+    updateScores();
+    switchPlayer();
+    currentDare = null;
+    showDare("");
+    dareActions.style.display = "none";
+  });
+
+  passBtn.addEventListener("click", () => {
+    // No points, just switch turn
+    switchPlayer();
+    currentDare = null;
+    showDare("");
+    dareActions.style.display = "none";
+  });
+
+  doubleDareBtn.addEventListener("click", () => {
+    // Award 2 points for double dare
+    playerScores[currentPlayer - 1] += 2;
+    updateScores();
+    switchPlayer();
+    currentDare = null;
+    showDare("");
+    dareActions.style.display = "none";
+  });
+
+  // Initialize page
+  function init() {
+    updateTurnIndicator();
+    updateScores();
+
+    // Spawn initial emojis for the default mode
+    spawnEmojis(unicornEmojis);
+  }
+
+  init();
 </script>
 </body>
 </html>
